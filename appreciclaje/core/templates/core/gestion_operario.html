@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Solicitudes Asignadas</h2>
+<table class="table">
+  <tr>
+    <th>Material</th>
+    <th>Cantidad</th>
+    <th>Estado</th>
+    <th>Acciones</th>
+  </tr>
+  {% for solicitud in solicitudes %}
+  <tr>
+    <form method="post">
+      {% csrf_token %}
+      <td>{{ solicitud.get_tipo_material_display }}</td>
+      <td>{{ solicitud.cantidad }}</td>
+      <td>
+        <input type="hidden" name="id" value="{{ solicitud.id }}">
+        <select name="estado" class="form-select">
+          <option value="pendiente" {% if solicitud.estado == 'pendiente' %}selected{% endif %}>Pendiente</option>
+          <option value="en_ruta" {% if solicitud.estado == 'en_ruta' %}selected{% endif %}>En ruta</option>
+          <option value="completada" {% if solicitud.estado == 'completada' %}selected{% endif %}>Completada</option>
+        </select>
+      </td>
+      <td>
+        <input name="comentario" placeholder="Comentario" class="form-control mb-1">
+        <button class="btn btn-primary btn-sm" type="submit">Actualizar</button>
+      </td>
+    </form>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

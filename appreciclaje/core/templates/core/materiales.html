@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Materiales aceptados</h2>
+<ul class="list-group">
+  {% for cod, nombre, descripcion in materiales %}
+    <li class="list-group-item">
+      <strong>{{ nombre }}</strong> ({{ cod }})<br>
+      {{ descripcion }}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

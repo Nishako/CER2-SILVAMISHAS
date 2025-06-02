@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<p>Selecciona una opción:</p>
+<ul>
+  <li><a href="{% url 'materiales' %}">Ver materiales aceptados</a></li>
+  <li><a href="{% url 'recomendaciones' %}">Ver recomendaciones</a></li>
+  <li><a href="{% url 'puntos_limpios' %}">Ver puntos limpios</a></li>
+  <li><a href="{% url 'metricas' %}">Ver métricas</a></li>
+
+  {% if user.is_authenticated %}
+    <li><a href="{% url 'nueva' %}">Crear nueva solicitud</a></li>
+    <li><a href="{% url 'historial' %}">Ver historial de solicitudes</a></li>
+  {% endif %}
+</ul>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Métricas del reciclaje</h2>
+
+<h4>Solicitudes por mes</h4>
+<ul>
+  {% for item in solicitudes_por_mes %}
+    <li>{{ item.mes }}: {{ item.total }} solicitudes</li>
+  {% endfor %}
+</ul>
+
+<h4>Materiales más reciclados</h4>
+<ul>
+  {% for item in materiales_populares %}
+    <li>{{ item.tipo_material }}: {{ item.total }} veces</li>
+  {% endfor %}
+</ul>
+
+<h4>Tiempo promedio de retiro estimado</h4>
+<p>{{ promedio_dias|default:"No disponible" }} días desde la solicitud.</p>
+{% endblock %}

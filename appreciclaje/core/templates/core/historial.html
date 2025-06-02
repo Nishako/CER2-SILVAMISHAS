@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Historial de solicitudes</h2>
+<table class="table">
+  <tr>
+    <th>Material</th>
+    <th>Cantidad</th>
+    <th>Fecha estimada</th>
+    <th>Estado</th>
+  </tr>
+  {% for solicitud in solicitudes %}
+  <tr>
+    <td>{{ solicitud.get_tipo_material_display }}</td>
+    <td>{{ solicitud.cantidad }}</td>
+    <td>{{ solicitud.fecha_estimada }}</td>
+    <td>{{ solicitud.estado }}</td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="4">No tienes solicitudes aún.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
