@@ -74,11 +74,15 @@ def metricas(request):
         .order_by('-total')[:5]
     )
 
-    promedio_dias = (
-        Solicitud.objects
-        .annotate(dias_estimados=(datetime.now().date() - models.F('fecha_estimada')))
-        .aggregate(promedio=Avg('dias_estimados'))
-    )
+    solicitudes = Solicitud.objects.all()
+    if solicitudes.exists():
+        suma_dias = 0
+        for s in solicitudes:
+            diferencia = (date.today() - s.fecha_estimada).days
+            suma_dias += abs(diferencia)
+        promedio_dias = round(suma_dias / solicitudes.count())
+    else:
+        promedio_dias = None
 
     return render(request, 'core/metricas.html', {
         'solicitudes_por_mes': solicitudes_por_mes,
