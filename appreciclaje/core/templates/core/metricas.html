@@ -16,6 +16,10 @@
   {% endfor %}
 </ul>
 
-<h4>Tiempo promedio de retiro estimado</h4>
-<p>{{ promedio_dias|default:"No disponible" }} días desde la solicitud.</p>
+<h4>Tiempo promedio desde la fecha estimada</h4>
+{% if promedio_dias %}
+  <p>{{ promedio_dias }} días</p>
+{% else %}
+  <p>No disponible</p>
+{% endif %}
 {% endblock %}
